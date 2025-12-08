@@ -84,25 +84,3 @@ For issues or questions, contact your development team.
 
 Version History
 v1.0 (2024): Initial release with single and multi-channel support
-
----
-
-## How to Run
-
-1. **Create the project structure:**
-```bash
-mkdir teletrax-automation
-cd teletrax-automation
-mkdir config utils
-touch config/__init__.py utils/__init__.py
-
-Copy all files into their respective locations
-
-Install dependencies:
-
-pip install -r requirements.txt
-
-Run the app:
-streamlit run app.py
-
-The app will open in your browser at http://localhost:8501
