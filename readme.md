@@ -1,134 +1,105 @@
 **Teletrax Presentation Generator**
 
-Automated tool for generating client presentations from Teletrax tracking data.
+Automated tool that turns Teletrax exports into a client-ready PowerPoint in minutes using a simple Streamlit web page (runs on your computer).
 
-**Features**
+**What it does**
 
-✅ Single & Multi-Channel Support: Generate presentations for one or multiple channels
+- Builds a formatted PowerPoint report from Teletrax data exports
+- Supports single-channel and multi-channel reporting (where applicable)
+- Generates charts and summary insights based on your uploaded files
+- Full step-by-step user guide: https://docs.google.com/document/d/1jhVb3abKpw0LboDQ8VIJrc-0P9GUWFtY9Vnuvzpnq-Q/edit?tab=t.0
 
-✅ Automated Chart Generation: Time series, pie charts with exact color matching
+**Quick start (non-technical)**
 
-✅ Slug Line Analysis: Automatic extraction of top 3 most-used stories
+- Install Python (one-time setup)
+  - You need a Python environment to run this tool.
+  - Recommended: Python 3.11
+  - Also OK: Python 3.10+
 
-✅ PowerPoint Export: Professional slides ready for client delivery
+- Check if Python is installed:
+  - Windows:
+    - python --version
+  - Mac:
+    - python3 --version
+  - If you don't have Python (or it's older than 3.10), install Python 3.11 and retry the command above.
 
-✅ Web Interface: Easy-to-use Streamlit application
+- Get the code
+  - Clone or download this repository to your computer.
 
-**Installation**
+- Install dependencies
+  - Open Command Prompt (Windows) or Terminal (Mac) IN the project folder (the folder that contains app.py and requirements.txt), then run:
+     - pip install -r requirements.txt
+- Run the app
+  - Run:
+   - streamlit run app.py
 
-Clone or download this repository
+- Then open (or keep open) your browser at:
+  - http://localhost:8501
+  - "localhost" means it's running on your computer (not on the internet).
 
-**Install dependencies:**
+**How to use (high level)**
 
-pip install -r requirements.txt
-Run the application:
+- Open the app in your browser
+- Choose report settings in the sidebar (presentation type / channel details)
+- Upload the required Teletrax export files
+- Click "Generate Presentation"
+- Download the finished .pptx
+- For exact Teletrax export steps and required columns, use the Google Doc guide link above.
 
-streamlit run app.py
+**Data files you'll upload (summary)**
 
-Open your browser to http://localhost:8501
+You'll upload 2–3 Teletrax exports depending on the report type.
 
-**USAGE**
+Typical inputs include:
 
-Data File Requirements
+- Time series / trend file (monthly trend over time)
+- Distribution file (e.g., country/location breakdown)
+- Slug / headline file (raw text used to compute top stories)
+- For multi-channel reporting, you may upload one distribution file per channel.
 
-Time Series Data (Top Left Chart):
+**Note:** The app expects specific column names. Use the Google Doc guide to export the correct format.
 
-Columns: Month, # Assets
+**Troubleshooting**#
 
-Format: Excel (.xlsx) or CSV
+1. App won't start / "streamlit not found"
+  - Reinstall dependencies:
+  - pip install -r requirements.txt
 
-**Country Distribution (Top Right Chart):**
+2. Charts not rendering or image export issues
+  - Install Kaleido (if not already included by requirements):
+  - pip install kaleido
 
-Columns: Location code (ISO country codes), # Hits
+3. PowerPoint generation fails
+  - Double-check:
+   - File type is .xlsx or .csv
+   - Columns match the expected names (see user guide)
+   - Files aren't empty and don't contain only headers
 
-Format: Excel (.xlsx) or CSV
-
-**Slug Line Data (Bottom Right):**
-
-Column: Headline/Slug text (raw data, will be counted automatically)
-
-Format: Excel (.xlsx) or CSV
-
-**Multi-Channel Data (if applicable):**
-
-Same format as Country Distribution
-
-One file per channel
-
-**STEPS**
-
-Configure presentation type and channel details in the sidebar
-
-Enter stats (edits, lives, countries, duration)
-
-Upload all required data files
-
-Click "Generate Presentation"
-
-Preview charts in the web interface
-
-Download the PowerPoint file
-
-**Project Structure**
+**Project structure**
 
 teletrax-automation/
+- app.py
+- requirements.txt
+- config/
+  - colors.py
+- utils/
+  - init.py
+  - data_processing.py
+  - chart_generator.py
+  - ppt_generator.py
+- README.md
 
-├── app.py                     # Main Streamlit application
+**Customization (for developers)**
 
-├── requirements.txt            # Python dependencies
+1. Colors:
+- Edit config/colors.py
 
-├── config/
+2. Chart styling:
+- Modify utils/chart_generator.py
 
-│   └── colors.py              # Color palette configuration
+3. Slide layout / formatting:
+- Update utils/ppt_generator.py
 
-├── utils/
+**Version history**
 
-│   ├── __init__.py
-
-│   ├── data_processing.py     # Data loading and processing
-
-│   ├── chart_generator.py     # Plotly chart generation
-
-│   └── ppt_generator.py       # PowerPoint creation
-
-└── README.md                   # This file
-
-
-**CUSTOMISATION**
-
-**Colors**
-
-Edit config/colors.py to modify the color palette.
-
-**Chart Styling**
-
-Modify functions in utils/chart_generator.py to adjust chart appearance.
-
-**Slide Layout**
-
-Update utils/ppt_generator.py to change PowerPoint positioning and formatting.
-
-**TROUBLESHOOTING**
-
-**Charts not displaying:**
-
-Ensure kaleido is installed: pip install kaleido
-
-**PowerPoint generation fails:**
-
-Check that all data files have the correct column structure
-
-Verify file formats (Excel or CSV only)
-
-**Slug extraction issues:**
-
-Ensure slug data has text
-
-Check for empty rows or invalid data
-
-**Support**
-
-For issues or questions, contact your development team.
-
-Version History
-v1.0 (2025): Initial release with single and multi-channel support
+v1.0 (2025): Initial release (Streamlit app + PPT export)
